@@ -1,0 +1,11 @@
+info:
+  app: Config Server
+  description: Servidor de configuración centralizada
+  version: 1.0.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+

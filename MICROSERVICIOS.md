@@ -200,7 +200,143 @@ Deberías ver el contenido de `users-service.yml` parseado como JSON (propiedade
 
 ## ✅ ¿Siguiente paso?
 
-¿Quieres que pasemos ya a montar el `discovery-server` (Eureka) y configurar `users-service` para que se registre ahí y lea desde el `config-server`? Es la siguiente pieza clave.
 
 
+Si ya tienes todos los módulos, el `config-repo` y los `.yml` listos, vamos a **arrancar el sistema paso a paso** y ver qué debe ocurrir en cada uno. 
 
+---
+
+## 🚀 ORDEN DE ARRANQUE
+
+Es importante arrancar los servicios **en el orden correcto** para evitar errores de conexión:
+
+### 1. 🔧 `config-server`
+
+### 2. 🧭 `discovery-server`
+
+### 3. 🌐 `gateway`
+
+### 4. 👤 `users-service`
+
+### 5. 📦 `orders-service`
+
+---
+
+## ✅ PASO A PASO
+
+---
+
+### 1. 🔧 **Arrancar `config-server`**
+
+Desde IntelliJ o consola:
+
+```bash
+cd config-server
+mvn spring-boot:run
+```
+
+### 🔍 Qué debes ver:
+
+* Puerto: `8888`
+* Mensaje como:
+
+  ```
+  Located environment: users-service/default
+  ```
+
+Prueba en el navegador:
+
+```
+http://localhost:8888/users-service/default
+```
+
+✅ Debe mostrar el contenido JSON de `users-service.yml`
+
+---
+
+### 2. 🧭 **Arrancar `discovery-server`**
+
+```bash
+cd discovery-server
+mvn spring-boot:run
+```
+
+### 🔍 Qué debes ver:
+
+* Puerto: `8761`
+* Web UI de Eureka disponible en:
+  👉 `http://localhost:8761`
+
+Al principio estará vacío (sin servicios registrados).
+
+---
+
+### 3. 🌐 **Arrancar `gateway`**
+
+```bash
+cd gateway
+mvn spring-boot:run
+```
+
+### 🔍 Qué debes ver:
+
+* Puerto: `8080`
+* En consola:
+
+  ```
+  DiscoveryClient ... registering service with Eureka
+  ```
+
+Cuando visites:
+👉 `http://localhost:8080/`
+(dependiendo de si has definido rutas) puedes probar más adelante llamadas a `/users` o `/orders`.
+
+---
+
+### 4. 👤 **Arrancar `users-service`**
+
+```bash
+cd users-service
+mvn spring-boot:run
+```
+
+### 🔍 Qué debes ver:
+
+* Puerto: `8081`
+* Registro correcto en Eureka:
+
+  ```
+  DiscoveryClient ... registering service with Eureka
+  ```
+
+Ve a `http://localhost:8761`, y verás `USERS-SERVICE` en la lista.
+
+También puedes visitar:
+👉 `http://localhost:8081/actuator/info`
+👉 `http://localhost:8081/actuator/health`
+
+---
+
+### 5. 📦 **Arrancar `orders-service`**
+
+Igual que `users`, en puerto `8082`.
+
+---
+
+## ✅ Qué deberías ver en total
+
+| Componente         | Dirección esperada                      |
+| ------------------ | --------------------------------------- |
+| Config Server      | `http://localhost:8888`                 |
+| Eureka (Discovery) | `http://localhost:8761`                 |
+| Gateway            | `http://localhost:8080`                 |
+| Users              | `http://localhost:8081` + `/actuator/*` |
+| Orders             | `http://localhost:8082` + `/actuator/*` |
+
+En Eureka (`localhost:8761`), deben verse registrados:
+
+* `users-service`
+* `orders-service`
+* `gateway`
+
+---

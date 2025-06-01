@@ -1,25 +1,27 @@
+# Nombre del servicio, usado por Eureka y el config-server para identificar la configuración
 spring:
   application:
     name: users-service
 
+# Puerto en el que se ejecutará este microservicio
 server:
   port: 8081
 
-
+# Información del servicio que se mostrará en /actuator/info (si está habilitado)
 info:
-  app: Usuario
-  description: Servicio de gestión de usuarios
-  version: 1.0.0
+  app: Usuario                             # Nombre informal o alias del servicio
+  description: Servicio de gestión de usuarios  # Breve descripción funcional
+  version: 1.0.0                           # Versión del microservicio (informativa)
 
-
+# Configuración del cliente Eureka: se registrará en este servidor de descubrimiento
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka  # URL donde está expuesto el Eureka Server
 
-
+# Exposición de endpoints técnicos (actuator)
 management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health, info             # Solo se exponen /actuator/health y /actuator/info
