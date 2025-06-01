@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+
+  profiles:
+    active: native
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:./config-repo
+
+        #git:
+        #  uri: https://github.com/tu-usuario/tu-repo-config
+        #  default-label: main
+        #  search-paths: config
+
+# Actuator para monitorización opcional
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
