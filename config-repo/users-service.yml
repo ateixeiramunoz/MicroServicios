@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: users-service
+
+server:
+  port: 8081
+
+
+info:
+  app: Usuario
+  description: Servicio de gestión de usuarios
+  version: 1.0.0
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
