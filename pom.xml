@@ -8,6 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging> <!-- 👈 NUEVO -->
 
+
+
 	<name>MicroServicios</name>
 	<description>MicroServicios</description>
 
@@ -17,8 +19,9 @@
 	</properties>
 
 	<modules>
+		<module>shared</module>
 		<module>config-server</module>
-		<module>discovery-server</module>
+		<module>discovery</module>
 		<module>gateway</module>
 		<module>users-service</module>
 		<module>orders-service</module>

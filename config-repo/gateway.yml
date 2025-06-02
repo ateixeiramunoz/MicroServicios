@@ -11,28 +11,23 @@ spring:
 
       routes:
         - id: frontend-service
-          uri: lb://fronted-service   # <- ¡IMPORTANTE! Usa 'lb://' para usar el nombre registrado en Eureka
+          uri: lb://frontend-service
           predicates:
             - Path=/**
-          filters:
-            - StripPrefix=1
 
         - id: users-service
-          uri: lb://users-service   # <- ¡IMPORTANTE! Usa 'lb://' para usar el nombre registrado en Eureka
+          uri: lb://users-service
           predicates:
             - Path=/api/usuarios/**
-          filters:
-            - StripPrefix=1
 
         - id: orders-service
-          uri: lb://orders-service  # <- También se accede por el nombre en Eureka
+          uri: lb://orders-service
           predicates:
             - Path=/api/pedidos/**
-          filters:
-            - StripPrefix=1
+
 
 server:
-  port: 8080
+  port: 80
 
 eureka:
   client:

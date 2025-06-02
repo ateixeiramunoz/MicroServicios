@@ -1,20 +1,20 @@
-package main.java.com.atm.frontendservice.usuarios;
+package com.atm.usersservice.controller;
 
 import com.atm.usersservice.model.Usuario;
 import com.atm.usersservice.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@Controller
-@RequestMapping("/usuarios")
-public class UsuarioRestTemplateController {
+@RestController
+@RequestMapping("/api/usuarios")
+public class UsuarioRestController {
 
     private final UsuarioService usuarioService;
 
-    public UsuarioRestTemplateController(UsuarioService usuarioService) {
+    public UsuarioRestController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
@@ -25,8 +25,8 @@ public class UsuarioRestTemplateController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obtener(@PathVariable Long id) {
-        return usuarioService.obtenerPorId(id)
-                .map(ResponseEntity::ok)
+        Optional<Usuario> usuario = usuarioService.obtenerPorId(id);
+        return usuario.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -41,3 +41,4 @@ public class UsuarioRestTemplateController {
         return ResponseEntity.noContent().build();
     }
 }
+

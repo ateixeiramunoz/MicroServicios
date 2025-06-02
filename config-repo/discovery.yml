@@ -1,0 +1,23 @@
+# config-repo/discovery.yml
+spring:
+  application:
+    name: discovery
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+info:
+  app: Discovery
+  description: Servidor Eureka
+  version: 1.0.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+
+server:
+  port: 8761

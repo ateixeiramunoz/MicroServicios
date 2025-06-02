@@ -1,6 +1,5 @@
 package com.atm.ordersservice.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,4 +25,7 @@ public class Pedido {
     private String password;
 
     private boolean activo;
+
+    private Long usuarioId; // En lugar de @ManyToOne
+
 }

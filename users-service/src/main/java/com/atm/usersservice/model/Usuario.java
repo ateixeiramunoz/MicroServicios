@@ -20,6 +20,8 @@ public class Usuario {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pedido> pedidos = new ArrayList<>();
+    private String apellido;
+
+    private String email;
+
 }
