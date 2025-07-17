@@ -200,7 +200,33 @@ Deberías ver el contenido de `users-service.yml` parseado como JSON (propiedade
 
 ## ✅ ¿Siguiente paso?
 
-¿Quieres que pasemos ya a montar el `discovery-server` (Eureka) y configurar `users-service` para que se registre ahí y lea desde el `config-server`? Es la siguiente pieza clave.
 
 
+Si ya tienes todos los módulos, el `config-repo` y los `.yml` listos, vamos a **arrancar el sistema paso a paso** y ver qué debe ocurrir en cada uno. 
+
+---
+
+## 🚀 ORDEN DE ARRANQUE
+
+Es importante arrancar los servicios **en el orden correcto** para evitar errores de conexión:
+
+### 1. 🔧 `config-server`
+
+### 2. 🧭 `discovery-server`
+
+### 3. 🌐 `gateway`
+
+### 4. 👤 `users-service`
+
+### 5. 📦 `orders-service`
+
+---
+
+Ve a `http://localhost:8761`, y verás `USERS-SERVICE` en la lista.
+
+También puedes visitar:
+👉 `http://localhost:8081/actuator/info`
+👉 `http://localhost:8081/actuator/health`
+
+---
 

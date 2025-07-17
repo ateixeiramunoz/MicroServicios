@@ -2,18 +2,40 @@ spring:
   application:
     name: gateway
 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true         # Habilita descubrimiento dinámico vía Eureka
+          lower-case-service-id: true  # Convierte los IDs de los servicios a minúsculas
+
+      routes:
+        - id: frontend-service
+          uri: lb://frontend-service   //Load Balancer
+          predicates:
+            - Path=/**
+
+        - id: users-service
+          uri: lb://users-service
+          predicates:
+            - Path=/api/usuarios/**
+
+        - id: orders-service
+          uri: lb://orders-service
+          predicates:
+            - Path=/api/pedidos/**
+
+
 server:
-  port: 8080
+  port: 80
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-spring:
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

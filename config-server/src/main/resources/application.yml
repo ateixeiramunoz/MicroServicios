@@ -5,11 +5,23 @@ spring:
   application:
     name: config-server
 
+  profiles:
+    active: native
+
   cloud:
     config:
       server:
         native:
-          search-locations: file:../config-repo  # Ruta relativa al módulo
-        # Alternativa: si lo mueves a un path absoluto:
-        # search-locations: file:/ruta/completa/a/config-repo
-      label: main
+          search-locations: file:./config-repo
+
+        #git:
+        #  uri: https://github.com/tu-usuario/tu-repo-config
+        #  default-label: main
+        #  search-paths: config
+
+# Actuator para monitorización opcional
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

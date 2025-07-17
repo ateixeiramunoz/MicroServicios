@@ -1,0 +1,44 @@
+# Nombre del servicio, usado por Eureka y el config-server para identificar la configuración
+spring:
+  application:
+    name: frontend-service
+# Configuración del gateway (si decides enrutarlo también)
+# opcional si no pasa por gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false # si quieres forzar Spring Cloud LoadBalancer sin Ribbon
+
+# Puerto en el que se ejecutará este microservicio (puedes cambiarlo si el 80 está ocupado)
+server:
+  port: 80
+
+# Información que se muestra en /actuator/info (si está habilitado)
+info:
+  app: Frontend
+  description: Servicio web que consume APIs y renderiza vistas con Thymeleaf
+  version: 1.0.0
+
+# Configuración del cliente Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+# Exposición de endpoints técnicos
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+
+# Tiempo de espera recomendado para llamadas WebClient (opcional)
+webclient:
+  timeout: 5s
+
+# (Opcional) variable de entorno o perfil activo si lo necesitas
+# spring:
+#   profiles:
+#     active: dev
