@@ -11,7 +11,7 @@ spring:
 
       routes:
         - id: frontend-service
-          uri: lb://frontend-service
+          uri: lb://frontend-service   //Load Balancer
           predicates:
             - Path=/**
 

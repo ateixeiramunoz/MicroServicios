@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioConPedidosDto {
+
     private UsuarioDto usuario;
     private List<PedidoDto> pedidos;
 }
